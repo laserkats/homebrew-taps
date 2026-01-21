@@ -1,4 +1,4 @@
-class MbglRender < Formula
+class MapLibre < Formula
   desc "MapLibre Native static map renderer CLI"
   homepage "https://github.com/maplibre/maplibre-native"
   url "https://github.com/maplibre/maplibre-native.git",
@@ -22,12 +22,15 @@ class MbglRender < Formula
     ENV.append "LDFLAGS", "-framework OpenGL -framework CoreGraphics -framework CoreFoundation"
 
     system "cmake", "-B", "build", "-G", "Ninja",
-           "-DCMAKE_BUILD_TYPE=Release",
-           "-DMLN_WITH_METAL=OFF",
-           "-DMLN_WITH_OPENGL=ON",
-           "-DMLN_WITH_GLFW=OFF",
-           "-DCMAKE_EXE_LINKER_FLAGS=-framework OpenGL -framework CoreGraphics -framework CoreFoundation",
-           *std_cmake_args
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMLN_WITH_NODE=ON",
+    "-DMLN_WITH_OPENGL=ON",
+    "-DMLN_WITH_METAL=ON",
+    "-DCMAKE_CXX_COMPILER_LAUNCHER=ccache",
+    "-DCMAKE_C_COMPILER=gcc",
+    "-DCMAKE_CXX_COMPILER=g++"
+     # "-DCMAKE_EXE_LINKER_FLAGS=-framework OpenGL -framework CoreGraphics -framework CoreFoundation",
+     *std_cmake_args
     system "cmake", "--build", "build", "--target", "mbgl-render", "-j#{ENV.make_jobs}"
     bin.install "build/bin/mbgl-render"
   end

@@ -5,8 +5,8 @@ Homebrew tap for MapLibre Native tools.
 ## Installation
 
 ```bash
-brew tap laserkats/maplibre
-brew install mbgl-render
+brew tap laserkats/taps
+brew install maplibre
 ```
 
 ## Available Formulas
